@@ -13,6 +13,7 @@ namespace QuizMaker
         private static object syncRoot = new object();
         List<Question> questions;
         string title;
+        int count;
         #endregion
 
         #region Constructor
@@ -42,6 +43,7 @@ namespace QuizMaker
                         {
                             instance = new QuestionBank();
                             instance.Questions = new List<Question>();
+                            instance.count = -1;
                         }
                     }
                 }
@@ -68,6 +70,12 @@ namespace QuizMaker
             {
                 title = value;
             }
+        }
+
+        public int Count
+        {
+            get { return count; }
+            set { count = value; }
         }
         #endregion
     }

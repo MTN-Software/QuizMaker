@@ -48,6 +48,18 @@
   <ItemGroup>
     <Compile Include="Answer.cs" />
     <Compile Include="DocumentMaker.cs" />
+    <Compile Include="Forms\Add Answer Form.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Add Answer Form.Designer.cs">
+      <DependentUpon>Add Answer Form.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Add Question Form.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Add Question Form.Designer.cs">
+      <DependentUpon>Add Question Form.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Main Form.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -64,6 +76,12 @@
     <Compile Include="User Controls\QuestionBankEditorControl.Designer.cs">
       <DependentUpon>QuestionBankEditorControl.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Forms\Add Answer Form.resx">
+      <DependentUpon>Add Answer Form.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Add Question Form.resx">
+      <DependentUpon>Add Question Form.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Main Form.resx">
       <DependentUpon>Main Form.cs</DependentUpon>
     </EmbeddedResource>
@@ -91,6 +109,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="tempFile.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

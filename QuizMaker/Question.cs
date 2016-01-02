@@ -17,6 +17,7 @@ namespace QuizMaker
         public Question(string text)
         {
             this.text = text;
+            answers = new List<Answer>();
         }
 
         public Question(string text, params Answer[] answers)

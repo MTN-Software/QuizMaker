@@ -15,6 +15,7 @@ namespace QuizMaker
     public sealed class DocumentMaker
     {
         #region Members
+        const string docHeader = "<?xml version=\"1.0\" encoding=\"utf-8\" ?> ";
         XDocument xDocument;
         private static volatile DocumentMaker instance; // volatile ensures that the 
                                                         // assignment to the instance 
@@ -73,8 +74,7 @@ namespace QuizMaker
             get { return xDocument; }
             set
             {
-                if (!xDocument.Equals(value))
-                    xDocument = value;
+                xDocument = value;
             }
         }
         #endregion

@@ -1,4 +1,6 @@
-﻿namespace QuizMaker
+﻿using System;
+
+namespace QuizMaker
 {
     partial class frmMain
     {
@@ -39,7 +41,7 @@
             this.tabControl = new System.Windows.Forms.TabControl();
             this.tabEditor = new System.Windows.Forms.TabPage();
             this.tabXml = new System.Windows.Forms.TabPage();
-            this.txtXmlPreview = new System.Windows.Forms.TextBox();
+            this.txtXmlPreview = new System.Windows.Forms.RichTextBox();
             this.questionBankEditorControl1 = new QuizMaker.User_Controls.QuestionBankEditorControl();
             this.mnuMain.SuspendLayout();
             this.tabControl.SuspendLayout();
@@ -146,13 +148,15 @@
             // 
             // txtXmlPreview
             // 
+            this.txtXmlPreview.AcceptsTab = true;
             this.txtXmlPreview.Dock = System.Windows.Forms.DockStyle.Fill;
             this.txtXmlPreview.Location = new System.Drawing.Point(3, 3);
-            this.txtXmlPreview.Multiline = true;
             this.txtXmlPreview.Name = "txtXmlPreview";
             this.txtXmlPreview.ReadOnly = true;
             this.txtXmlPreview.Size = new System.Drawing.Size(587, 375);
             this.txtXmlPreview.TabIndex = 0;
+            this.txtXmlPreview.Text = "";
+            this.txtXmlPreview.Enter += new System.EventHandler(this.txtXmlPreview_Enter);
             // 
             // questionBankEditorControl1
             // 
@@ -177,7 +181,6 @@
             this.tabControl.ResumeLayout(false);
             this.tabEditor.ResumeLayout(false);
             this.tabXml.ResumeLayout(false);
-            this.tabXml.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -196,7 +199,7 @@
         private System.Windows.Forms.TabControl tabControl;
         private System.Windows.Forms.TabPage tabEditor;
         private System.Windows.Forms.TabPage tabXml;
-        private System.Windows.Forms.TextBox txtXmlPreview;
+        private System.Windows.Forms.RichTextBox txtXmlPreview;
         private User_Controls.QuestionBankEditorControl questionBankEditorControl1;
     }
 }
