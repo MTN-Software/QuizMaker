@@ -23,5 +23,12 @@ namespace QuizMaker
                 this.Close();
             
         }
+
+        #region XML Tab
+        private void tabXml_Enter(object sender, EventArgs e)
+        {
+            //TODO: update textbox contents here.
+        }
+        #endregion
     }
 }
