@@ -22,8 +22,9 @@ namespace QuizMaker
         {
             InitializeComponent();
             DocumentMaker.Instance.XDoc = XDocument.Load(@"..\..\tempFile.xml");
-            listQ = questionBankEditorControl1.Controls[0].Controls[1].Controls[0].Controls[0].Controls[0];
-            listA = questionBankEditorControl1.Controls[0].Controls[1].Controls[0].Controls[1].Controls[0];
+            listQ = questionBankEditorControl1.Controls[0].Controls[1].Controls[0].Controls[0].Controls[0]; // \
+                                                                                                            //  |- These are redundant
+            listA = questionBankEditorControl1.Controls[0].Controls[1].Controls[0].Controls[1].Controls[0]; // /
             currentDocument = null;
         }
 
@@ -64,7 +65,7 @@ namespace QuizMaker
             if (saveFile.ShowDialog() == DialogResult.OK)
             {
                 using (StreamWriter sw = new StreamWriter(saveFile.FileName))
-                    sw.Write("");
+                    sw.Write(""); // create a blank file.
                 DocumentMaker.Instance.XDoc.Save(saveFile.FileName);
                 currentDocument = saveFile.FileName;
             }
@@ -87,7 +88,7 @@ namespace QuizMaker
             if (MessageBox.Show("Any unsaved modifications will be lost.", "Are you sure?", MessageBoxButtons.YesNo) == DialogResult.Yes)
             {
                 DocumentMaker.Instance.XDoc = XDocument.Load(@"..\..\superTemp.xml");
-                DocumentMaker.Instance.XDoc.Save(@"..\..\tempFile.xml");
+                DocumentMaker.Instance.XDoc.Save(@"..\..\tempFile.xml");  // erase all content in the temporary file
                 currentDocument = null;
             }
         }

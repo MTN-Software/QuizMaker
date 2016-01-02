@@ -23,9 +23,9 @@ namespace QuizMaker
             QuestionBank.Instance.Count++;
             string textValue = txtQuestion.Text;
             DocumentMaker.Instance.XDoc.Root.Add(new XElement("Question", new XAttribute("id", $"{QuestionBank.Instance.Count}"),
-                                            new XElement("Text", textValue)));
-            DocumentMaker.Instance.XDoc.Save(@"..\..\tempFile.xml");
-            QuestionBank.Instance.AddQuestion(new Question(textValue));
+                                            new XElement("Text", textValue)));  // adds a new question to the xml file with a subelement "Text" containing the text in the textbox
+            DocumentMaker.Instance.XDoc.Save(@"..\..\tempFile.xml");            // saves to the temporary file.
+            QuestionBank.Instance.AddQuestion(new Question(textValue));         // adds the question to the question bank
             Close();
         }
     }

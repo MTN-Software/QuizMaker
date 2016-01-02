@@ -29,12 +29,14 @@ namespace QuizMaker
         {
             Answer newAns = new Answer(txtAnswer.Text, chkIsCorrect.Checked);
             DocumentMaker.Instance.XDoc.Descendants("Question")
-                        .Where(n => (string)n.Element("Text") == elementName)
-                        .Single().Add(new XElement("Answer", new XAttribute("isCorrect", newAns.IsCorrect.ToString().ToLower()), newAns.Text));
-            DocumentMaker.Instance.XDoc.Save(@"..\..\tempFile.xml");
+                        .Where(n => (string)n.Element("Text") == elementName)   // gets the question that has the same text as elementName
+                        .Single().Add(new XElement("Answer", new XAttribute("isCorrect", newAns.IsCorrect.ToString().ToLower()), newAns.Text)); // adds a new "Answer" subelement to the question 
+                                                                                                                                                // containing whether or not it is the correct answer and
+                                                                                                                                                // the text from the textbox
+            DocumentMaker.Instance.XDoc.Save(@"..\..\tempFile.xml"); // save to temporary file.
             QuestionBank.Instance.Questions
                                 .Where(x => x.Text == elementName)
-                                .Single().Answers.Add(newAns);
+                                .Single().Answers.Add(newAns);      // adds the answer to the corresponding question's answer list
             this.Close();
         }
     }

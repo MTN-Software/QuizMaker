@@ -55,10 +55,11 @@ namespace QuizMaker.User_Controls
                 elementName = listQuestions.SelectedItems[0].SubItems[1].Text;
                 btnAddAnswer.Enabled = true;
 
-                listAnswers.Items.Clear();
-                Question selected = QuestionBank.Instance.Questions
+                listAnswers.Items.Clear(); // clears the items so that doubles aren't added
+
+                Question selected = QuestionBank.Instance.Questions   
                                                             .Where(n => n.Text == elementName)
-                                                            .Single();
+                                                            .Single(); // selects the question that has the same text as the one in the listview
 
                 ListViewItem[] Answers = new ListViewItem[selected.Answers.Count];
                 for (int i = 0; i < Answers.Length; i++)
