@@ -47,12 +47,22 @@ namespace QuizMaker
         {
             //Leave blank for now
         }
+
         #endregion
 
         #region Tasks
 
         #endregion
 
-        
+        private void saveAsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog saveFile = new SaveFileDialog();
+            saveFile.CreatePrompt = true;
+            saveFile.Filter = "XML Files (*.xml)|*.xml";
+            if (saveFile.ShowDialog() == DialogResult.OK)
+            {
+                
+            }
+        }
     }
 }
