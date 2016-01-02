@@ -54,6 +54,19 @@ namespace QuizMaker.User_Controls
             {
                 elementName = listQuestions.SelectedItems[0].SubItems[1].Text;
                 btnAddAnswer.Enabled = true;
+
+                listAnswers.Items.Clear();
+                Question selected = QuestionBank.Instance.Questions
+                                                            .Where(n => n.Text == elementName)
+                                                            .Single();
+
+                ListViewItem[] Answers = new ListViewItem[selected.Answers.Count];
+                for (int i = 0; i < Answers.Length; i++)
+                {
+                    Answers[i] = new ListViewItem(selected.Answers[i].Text);
+                    Answers[i].SubItems.Add(selected.Answers[i].IsCorrect.ToString().ToLower());
+                }
+                listAnswers.Items.AddRange(Answers);
             }catch(Exception ex)
             {
                 //MessageBox.Show(ex.Message);

@@ -17,6 +17,7 @@ namespace QuizMaker
         #region Members
         const string docHeader = "<?xml version=\"1.0\" encoding=\"utf-8\" ?> ";
         XDocument xDocument;
+        XDocument emptyDoc;
         private static volatile DocumentMaker instance; // volatile ensures that the 
                                                         // assignment to the instance 
                                                         // variable is completed before

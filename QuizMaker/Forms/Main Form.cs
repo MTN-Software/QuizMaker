@@ -28,7 +28,11 @@ namespace QuizMaker
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (MessageBox.Show("Any unsaved modifications will be lost", "Are you sure?", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            {
+                DocumentMaker.Instance.XDoc = XDocument.Load(@"..\..\superTemp.xml");
+                DocumentMaker.Instance.XDoc.Save(@"..\..\tempFile.xml");
                 this.Close();
+            }
             
         }
 
