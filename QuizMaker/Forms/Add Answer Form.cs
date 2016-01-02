@@ -1,0 +1,41 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using System.Xml.Linq;
+
+namespace QuizMaker
+{
+    public partial class frmAddAnswer : Form
+    {
+        string elementName;
+        public frmAddAnswer()
+        {
+            InitializeComponent();
+        }
+
+        public frmAddAnswer(string elementName)
+        {
+            InitializeComponent();
+            this.elementName = elementName;
+        }
+
+        private void btnOK_Click(object sender, EventArgs e)
+        {
+            Answer newAns = new Answer(txtAnswer.Text, chkIsCorrect.Checked);
+            DocumentMaker.Instance.XDoc.Descendants("Question")
+                        .Where(n => (string)n.Element("Text") == elementName)
+                        .Single().Add(new XElement("Answer", new XAttribute("isCorrect", newAns.IsCorrect.ToString().ToLower()), newAns.Text));
+            DocumentMaker.Instance.XDoc.Save(@"..\..\tempFile.xml");
+            QuestionBank.Instance.Questions
+                                .Where(x => x.Text == elementName)
+                                .Single().Answers.Add(newAns);
+            this.Close();
+        }
+    }
+}
