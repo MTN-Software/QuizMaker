@@ -86,6 +86,7 @@ namespace QuizMaker.User_Controls
             this.btnSetBankName.TabIndex = 4;
             this.btnSetBankName.Text = "Set";
             this.btnSetBankName.UseVisualStyleBackColor = true;
+            this.btnSetBankName.Click += new System.EventHandler(this.btnSetBankName_Click);
             // 
             // label1
             // 

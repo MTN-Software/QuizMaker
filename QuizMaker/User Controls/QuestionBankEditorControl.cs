@@ -72,5 +72,11 @@ namespace QuizMaker.User_Controls
                 //MessageBox.Show(ex.Message);
             }
         }
+
+        private void btnSetBankName_Click(object sender, EventArgs e)
+        {
+            DocumentMaker.Instance.XDoc.Root.Attribute("Title").Value = txtQuestionBankName.Text;
+            DocumentMaker.Instance.XDoc.Save(@"..\..\tempFile.xml");
+        }
     }
 }

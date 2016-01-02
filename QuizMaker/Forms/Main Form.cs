@@ -17,12 +17,14 @@ namespace QuizMaker
     {
         Control listQ;
         Control listA;
+        string currentDocument;
         public frmMain()
         {
             InitializeComponent();
             DocumentMaker.Instance.XDoc = XDocument.Load(@"..\..\tempFile.xml");
             listQ = questionBankEditorControl1.Controls[0].Controls[1].Controls[0].Controls[0].Controls[0];
             listA = questionBankEditorControl1.Controls[0].Controls[1].Controls[0].Controls[1].Controls[0];
+            currentDocument = null;
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
@@ -57,12 +59,38 @@ namespace QuizMaker
         private void saveAsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             SaveFileDialog saveFile = new SaveFileDialog();
-            saveFile.CreatePrompt = true;
+            //saveFile.CreatePrompt = true;
             saveFile.Filter = "XML Files (*.xml)|*.xml";
             if (saveFile.ShowDialog() == DialogResult.OK)
             {
-                
+                using (StreamWriter sw = new StreamWriter(saveFile.FileName))
+                    sw.Write("");
+                DocumentMaker.Instance.XDoc.Save(saveFile.FileName);
+                currentDocument = saveFile.FileName;
             }
         }
+
+        private void saveToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (currentDocument == null)
+            {
+                saveAsToolStripMenuItem_Click(sender, e);
+            }
+            else
+            {
+                DocumentMaker.Instance.XDoc.Save(currentDocument);
+            }
+        }
+
+        private void newToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("Any unsaved modifications will be lost.", "Are you sure?", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            {
+                DocumentMaker.Instance.XDoc = XDocument.Load(@"..\..\superTemp.xml");
+                DocumentMaker.Instance.XDoc.Save(@"..\..\tempFile.xml");
+                currentDocument = null;
+            }
+        }
+
     }
 }

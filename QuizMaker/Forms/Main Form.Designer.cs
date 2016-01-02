@@ -40,9 +40,9 @@ namespace QuizMaker
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabControl = new System.Windows.Forms.TabControl();
             this.tabEditor = new System.Windows.Forms.TabPage();
-            this.questionBankEditorControl1 = new QuizMaker.User_Controls.QuestionBankEditorControl();
             this.tabXml = new System.Windows.Forms.TabPage();
             this.txtXmlPreview = new System.Windows.Forms.RichTextBox();
+            this.questionBankEditorControl1 = new QuizMaker.User_Controls.QuestionBankEditorControl();
             this.mnuMain.SuspendLayout();
             this.tabControl.SuspendLayout();
             this.tabEditor.SuspendLayout();
@@ -78,9 +78,11 @@ namespace QuizMaker
             this.newToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.N)));
             this.newToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.newToolStripMenuItem.Text = "&New";
+            this.newToolStripMenuItem.Click += new System.EventHandler(this.newToolStripMenuItem_Click);
             // 
             // openToolStripMenuItem
             // 
+            this.openToolStripMenuItem.Enabled = false;
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
             this.openToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
             this.openToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
@@ -92,6 +94,7 @@ namespace QuizMaker
             this.saveToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
             this.saveToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.saveToolStripMenuItem.Text = "&Save";
+            this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
             // 
             // saveAsToolStripMenuItem
             // 
@@ -135,14 +138,6 @@ namespace QuizMaker
             this.tabEditor.Text = "Editor";
             this.tabEditor.UseVisualStyleBackColor = true;
             // 
-            // questionBankEditorControl1
-            // 
-            this.questionBankEditorControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.questionBankEditorControl1.Location = new System.Drawing.Point(3, 3);
-            this.questionBankEditorControl1.Name = "questionBankEditorControl1";
-            this.questionBankEditorControl1.Size = new System.Drawing.Size(587, 375);
-            this.questionBankEditorControl1.TabIndex = 0;
-            // 
             // tabXml
             // 
             this.tabXml.Controls.Add(this.txtXmlPreview);
@@ -166,6 +161,14 @@ namespace QuizMaker
             this.txtXmlPreview.TabIndex = 0;
             this.txtXmlPreview.Text = "";
             this.txtXmlPreview.Enter += new System.EventHandler(this.txtXmlPreview_Enter);
+            // 
+            // questionBankEditorControl1
+            // 
+            this.questionBankEditorControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.questionBankEditorControl1.Location = new System.Drawing.Point(3, 3);
+            this.questionBankEditorControl1.Name = "questionBankEditorControl1";
+            this.questionBankEditorControl1.Size = new System.Drawing.Size(587, 375);
+            this.questionBankEditorControl1.TabIndex = 0;
             // 
             // frmMain
             // 
