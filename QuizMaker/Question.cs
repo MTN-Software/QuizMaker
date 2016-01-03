@@ -14,6 +14,12 @@ namespace QuizMaker
         #endregion
 
         #region Constructor
+        public Question()
+        {
+            this.text = string.Empty;
+            answers = new List<Answer>();
+        }
+
         public Question(string text)
         {
             this.text = text;
@@ -31,6 +37,7 @@ namespace QuizMaker
         public string Text
         {
             get { return text; }
+            set { text = value; }
         }
 
         public List<Answer> Answers

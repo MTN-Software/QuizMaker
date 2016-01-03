@@ -17,7 +17,7 @@ namespace QuizMaker
     {
         Control listQ;
         Control listA;
-        string currentDocument;
+        string currentDocument = null;
         public frmMain()
         {
             InitializeComponent();
@@ -25,7 +25,7 @@ namespace QuizMaker
             listQ = questionBankEditorControl1.Controls[0].Controls[1].Controls[0].Controls[0].Controls[0]; // \
                                                                                                             //  |- These are redundant
             listA = questionBankEditorControl1.Controls[0].Controls[1].Controls[0].Controls[1].Controls[0]; // /
-            currentDocument = null;
+            
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
@@ -85,7 +85,16 @@ namespace QuizMaker
 
         private void newToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show("Any unsaved modifications will be lost.", "Are you sure?", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            if (currentDocument != null)
+            {
+                if (MessageBox.Show("Any unsaved modifications will be lost.", "Are you sure?", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                {
+                    DocumentMaker.Instance.XDoc = XDocument.Load(@"..\..\superTemp.xml");
+                    DocumentMaker.Instance.XDoc.Save(@"..\..\tempFile.xml");  // erase all content in the temporary file
+                    currentDocument = null;
+                }
+            }
+            else
             {
                 DocumentMaker.Instance.XDoc = XDocument.Load(@"..\..\superTemp.xml");
                 DocumentMaker.Instance.XDoc.Save(@"..\..\tempFile.xml");  // erase all content in the temporary file
@@ -93,5 +102,42 @@ namespace QuizMaker
             }
         }
 
+        private void openToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            newToolStripMenuItem_Click(sender, e);
+            if (currentDocument == null)
+            {
+                OpenFileDialog openFile = new OpenFileDialog();
+                openFile.Filter = "XML Files (*.xml)|*.xml";
+                if (openFile.ShowDialog() == DialogResult.OK)
+                {
+                    DocumentMaker.Instance.Open(openFile.FileName);
+                    DocumentMaker.Instance.XDoc.Save(@"..\..\tempFile.xml");
+                    currentDocument = openFile.FileName;
+
+                    //QuestionBank.Instance.Questions
+                    var questions = DocumentMaker.Instance.XDoc.Descendants("Question");
+                    List<Question> listQ = new List<Question>();
+                    questions.ToList().ForEach(n =>
+                    {
+                        Question q = new Question();
+                        List<Answer> answerList = new List<Answer>();
+                        q.Text = n.Element("Text").Value;
+                        var answers = n.Elements("Answer").ToList();
+                        answers.ForEach(m =>
+                        {
+                            q.Answers.Add(new Answer(m.Value, m.Attribute("isCorrect").Value == "true"));
+                        });
+                        var correct = answers.Where(x => x.Attribute("isCorrect").Value == "true").Single().Value;
+                        //q.CorrectAnswer = q.Answers.Where(x => x.Text == correct).Single();
+                        listQ.Add(q);
+                    });
+
+                    QuestionBank.Instance.Questions = listQ;
+                    QuestionBank.Instance.Count = QuestionBank.Instance.Questions.Count - 1;
+                    MessageBox.Show("Please press refresh to apply these changes.", "File successfully loaded.");
+                }
+            }
+        }
     }
 }

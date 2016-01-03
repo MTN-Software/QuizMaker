@@ -46,6 +46,7 @@ namespace QuizMaker.User_Controls
                 Questions[i].SubItems.Add(QuestionBank.Instance.Questions[i].Text);
             }
             listQuestions.Items.AddRange(Questions);
+            txtQuestionBankName.Text = DocumentMaker.Instance.XDoc.Root.Attribute("Title").Value;
         }
 
         private void listQuestions_SelectedIndexChanged(object sender, EventArgs e)
